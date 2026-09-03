@@ -1,5 +1,5 @@
 """
-DF Application Suite - Central Portal Server
+DF Application portal - Central Portal Server
 Serves the unified portal launchpad on Port 8080 (or PORT env).
 """
 import http.server

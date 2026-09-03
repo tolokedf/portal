@@ -1,209 +1,379 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DF Application Suite - Central Portal</title>
+  <title>DF Application portal</title>
+  
+  <!-- Immediate Theme Pre-loader to prevent FOUC -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('df_portal_theme') || 'system';
+        let effectiveTheme = savedTheme;
+        if (savedTheme === 'system') {
+          effectiveTheme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        if (effectiveTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .glass {
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    body, button, input, select {
+      font-family: 'Google Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
-    .glass-card {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    .google-card {
+      background: #ffffff;
+      border: 1px solid #dadce0;
+      border-radius: 24px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .glass-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(59, 130, 246, 0.4);
-      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5), 0 0 25px -5px rgba(59, 130, 246, 0.2);
+
+    .dark .google-card {
+      background: #1e1f20;
+      border-color: #282a2c;
+    }
+
+    .google-card:hover {
+      border-color: #aecbfa;
+      box-shadow: 0 6px 20px rgba(60, 64, 67, 0.12), 0 2px 6px rgba(60, 64, 67, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .dark .google-card:hover {
+      border-color: #3c4043;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .google-btn-primary {
+      background-color: #1a73e8;
+      color: #ffffff;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .google-btn-primary:hover {
+      background-color: #1557b0;
+      box-shadow: 0 1px 3px 1px rgba(66, 133, 244, 0.28);
+    }
+
+    .google-btn-primary:active {
+      background-color: #174ea6;
+    }
+
+    .google-btn-outlined {
+      background-color: #ffffff;
+      border: 1px solid #dadce0;
+      color: #3c4043;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dark .google-btn-outlined {
+      background-color: #28292a;
+      border-color: #3c4043;
+      color: #e8eaed;
+    }
+
+    .google-btn-outlined:hover {
+      background-color: #f1f3f4;
+      color: #202124;
+      border-color: #c6c9cc;
+    }
+
+    .dark .google-btn-outlined:hover {
+      background-color: #333537;
+      color: #ffffff;
+      border-color: #5f6368;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+<body class="bg-[#f8fafd] dark:bg-[#131314] text-[#202124] dark:text-[#e8eaed] min-h-screen flex flex-col justify-between selection:bg-[#1a73e8] selection:text-white">
   
-  <!-- Background Glows -->
+  <!-- Subtle Ambient Glows -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="absolute -top-40 -left-40 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl"></div>
-    <div class="absolute top-1/2 -right-40 w-96 h-96 bg-cyan-600/15 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-indigo-600/15 rounded-full blur-3xl"></div>
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-blue-100/50 dark:bg-blue-900/15 rounded-full blur-3xl transition-colors duration-500"></div>
+    <div class="absolute top-1/3 -right-32 w-96 h-96 bg-emerald-100/40 dark:bg-emerald-900/10 rounded-full blur-3xl transition-colors duration-500"></div>
+    <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-amber-100/30 dark:bg-indigo-900/15 rounded-full blur-3xl transition-colors duration-500"></div>
   </div>
 
-  <!-- Header -->
-  <header class="relative z-10 glass border-b border-slate-800/80 px-6 py-4">
+  <!-- Google 4-Color Accent Strip at Top -->
+  <div class="h-1 w-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC04] to-[#34A853] sticky top-0 z-50"></div>
+
+  <!-- Header (Google App Bar Style) -->
+  <header class="relative z-20 bg-white/95 dark:bg-[#1e1f20]/95 backdrop-blur-md border-b border-[#dadce0] dark:border-[#3c4043] px-6 py-3.5 shadow-[0_1px_2px_0_rgba(60,64,67,0.06)] dark:shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] transition-colors duration-200">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20 font-extrabold text-lg text-white">
-          DF
+      
+      <!-- Brand Logo & Title -->
+      <div class="flex items-center space-x-3.5">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#00787c] to-[#00b5b8] p-1.5 flex items-center justify-center shadow-md shadow-[#00b5b8]/20 flex-shrink-0">
+          <img src="/static/df_logo_white.png" alt="DF" class="w-full h-full object-contain">
         </div>
         <div>
-          <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-            DF Application Suite
-            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Portal Hub</span>
+          <h1 class="text-base sm:text-lg font-semibold tracking-tight text-[#202124] dark:text-[#e8eaed]">
+            DF Application portal
           </h1>
-          <p class="text-xs text-slate-400">Modular Multi-App Unified Gateway</p>
         </div>
       </div>
       
-      <div class="flex items-center gap-3">
-        <span id="currentIpBadge" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-medium px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-cyan-400">
-          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Network Active
+      <!-- Top Actions -->
+      <div class="flex items-center gap-2.5">
+        <span id="currentIpBadge" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-medium px-3.5 py-1.5 rounded-full bg-[#f1f3f4] dark:bg-[#28292a] border border-[#dadce0] dark:border-[#3c4043] text-[#3c4043] dark:text-[#9aa0a6]">
+          <span class="w-2 h-2 rounded-full bg-[#1a73e8] dark:bg-[#8ab4f8] animate-pulse"></span> Network Active
         </span>
-        <button onclick="checkAllHealth()" class="text-xs flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors border border-slate-700">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-          Refresh Status
+
+        <!-- Theme Selector Dropdown (Light / Dark / System) -->
+        <div class="relative" id="themeDropdownContainer">
+          <button id="themeToggleBtn" onclick="toggleThemeMenu(event)" title="Theme Mode" class="text-xs font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-full google-btn-outlined shadow-xs cursor-pointer">
+            <span id="themeActiveIcon" class="material-symbols-outlined text-[17px]">brightness_auto</span>
+            <span id="themeActiveLabel" class="capitalize hidden md:inline">System</span>
+            <span class="material-symbols-outlined text-[14px] text-[#5f6368] dark:text-[#9aa0a6]">arrow_drop_down</span>
+          </button>
+
+          <!-- Theme Menu Dropdown -->
+          <div id="themeMenu" class="hidden absolute right-0 mt-2 w-40 bg-white dark:bg-[#28292a] border border-[#dadce0] dark:border-[#3c4043] rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] py-1.5 z-50 text-xs text-[#202124] dark:text-[#e8eaed] transition-all">
+            <button onclick="setTheme('light')" class="w-full px-3.5 py-2 text-left flex items-center justify-between hover:bg-[#f1f3f4] dark:hover:bg-[#333537] transition-colors" id="opt-light">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-amber-500">light_mode</span>
+                <span>Light</span>
+              </span>
+              <span class="theme-check hidden text-[#1a73e8] dark:text-[#8ab4f8] font-bold">✓</span>
+            </button>
+            <button onclick="setTheme('dark')" class="w-full px-3.5 py-2 text-left flex items-center justify-between hover:bg-[#f1f3f4] dark:hover:bg-[#333537] transition-colors" id="opt-dark">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-indigo-400">dark_mode</span>
+                <span>Dark</span>
+              </span>
+              <span class="theme-check hidden text-[#1a73e8] dark:text-[#8ab4f8] font-bold">✓</span>
+            </button>
+            <button onclick="setTheme('system')" class="w-full px-3.5 py-2 text-left flex items-center justify-between hover:bg-[#f1f3f4] dark:hover:bg-[#333537] transition-colors" id="opt-system">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-[#5f6368] dark:text-[#9aa0a6]">brightness_auto</span>
+                <span>Device default</span>
+              </span>
+              <span class="theme-check hidden text-[#1a73e8] dark:text-[#8ab4f8] font-bold">✓</span>
+            </button>
+          </div>
+        </div>
+
+        <button id="refreshBtn" onclick="checkAllHealth()" class="text-xs font-medium flex items-center gap-1.5 px-3.5 py-1.5 rounded-full google-btn-outlined shadow-xs cursor-pointer disabled:pointer-events-none">
+          <span id="refreshIcon" class="material-symbols-outlined text-[16px] text-[#5f6368] dark:text-[#9aa0a6] transition-transform">refresh</span>
+          <span id="refreshText">Refresh Status</span>
         </button>
       </div>
     </div>
   </header>
 
   <!-- Main Content -->
-  <main class="relative z-10 max-w-7xl mx-auto px-6 py-12 flex-1 w-full">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
-        Dedicated Enterprise Robotics Apps
-      </h2>
-      <p class="text-sm text-slate-400">
-        Launch dedicated micro-applications independently, run local diagnostics, and manage deployment workflows.
-      </p>
-    </div>
-
+  <main class="relative z-10 max-w-7xl mx-auto px-6 py-10 flex-1 w-full flex flex-col justify-center">
     <!-- Application Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       
       <!-- Card 1: DF RAG Project -->
-      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative group">
+      <div class="google-card p-6 flex flex-col justify-between relative group">
         <div>
           <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-2xl">
-              💬
+            <div class="w-12 h-12 rounded-2xl bg-[#e8f0fe] dark:bg-[#041e49] border border-[#d2e3fc] dark:border-[#1a73e8]/30 text-[#1a73e8] dark:text-[#8ab4f8] flex items-center justify-center shadow-xs">
+              <i class="fa-solid fa-robot text-[22px]"></i>
             </div>
-            <span id="status-rag" class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
-              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Port 5000
+            <span id="status-rag" class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-[#f1f3f4] dark:bg-[#28292a] text-[#5f6368] dark:text-[#9aa0a6] border border-[#dadce0] dark:border-[#3c4043] transition-all">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#80868b] dark:bg-[#9aa0a6]"></span> Port 5000
             </span>
           </div>
 
-          <h3 class="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">
+          <h3 class="text-lg font-bold text-[#202124] dark:text-[#e8eaed] mb-1 group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors">
             AI Chatbot (Multimodal RAG)
           </h3>
-          <p class="text-xs text-blue-400/90 font-mono mb-3">dfchatbot</p>
-          <p class="text-sm text-slate-400 leading-relaxed mb-4">
+          <p class="text-xs text-[#1a73e8] dark:text-[#8ab4f8] font-mono mb-3 bg-[#e8f0fe] dark:bg-[#041e49] px-2.5 py-0.5 rounded-full w-fit font-medium border border-[#d2e3fc] dark:border-[#1a73e8]/30">dfchatbot</p>
+          <p class="text-sm text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed mb-4">
             Vision-first multimodal retrieval for robotics manuals (NavWiz & DFleet) powered by Gemini Embedding 2, ChromaDB, and Gemini 3.5 Flash.
           </p>
 
           <div class="flex flex-wrap gap-1.5 mb-6">
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Python Flask</span>
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">ChromaDB</span>
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Gemini 3.5</span>
+            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Python Flask</span>
+            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">ChromaDB</span>
+            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Gemini 3.5</span>
           </div>
         </div>
 
-        <a href="http://localhost:5000" id="btn-rag" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25 transition-all">
-          Launch Chatbot
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        <a href="http://localhost:5000" id="btn-rag" target="_blank" class="w-full py-2.5 px-4 rounded-full google-btn-primary text-sm font-medium flex items-center justify-center gap-2 shadow-sm transition-all">
+          <span>Launch Chatbot</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
         </a>
       </div>
 
       <!-- Card 2: Site Readiness -->
-      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative group">
+      <div class="google-card p-6 flex flex-col justify-between relative group">
         <div>
           <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl">
-              📋
+            <div class="w-12 h-12 rounded-2xl bg-[#e0f2fe] dark:bg-[#082f49] border border-[#bae6fd] dark:border-[#0284c7]/30 text-[#0284c7] dark:text-[#38bdf8] flex items-center justify-center shadow-xs">
+              <i class="fa-solid fa-clipboard-check text-[22px]"></i>
             </div>
-            <span id="status-site" class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
-              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Port 3000
+            <span id="status-site" class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-[#f1f3f4] dark:bg-[#28292a] text-[#5f6368] dark:text-[#9aa0a6] border border-[#dadce0] dark:border-[#3c4043] transition-all">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#80868b] dark:bg-[#9aa0a6]"></span> Port 3000
             </span>
           </div>
 
-          <h3 class="text-xl font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors">
+          <h3 class="text-lg font-bold text-[#202124] dark:text-[#e8eaed] mb-1 group-hover:text-[#0284c7] dark:group-hover:text-[#38bdf8] transition-colors">
             Site Readiness App
           </h3>
-          <p class="text-xs text-cyan-400/90 font-mono mb-3">site-readiness</p>
-          <p class="text-sm text-slate-400 leading-relaxed mb-4">
+          <p class="text-xs text-[#0284c7] dark:text-[#38bdf8] font-mono mb-3 bg-[#e0f2fe] dark:bg-[#082f49] px-2.5 py-0.5 rounded-full w-fit font-medium border border-[#bae6fd] dark:border-[#0284c7]/30">site-readiness</p>
+          <p class="text-sm text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed mb-4">
             Interactive deployment readiness evaluation, sensor snapshots, action items tracking, and professional PDF verification reporting.
           </p>
 
           <div class="flex flex-wrap gap-1.5 mb-6">
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Python Flask</span>
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">ReportLab PDF</span>
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Audit Engine</span>
+            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Python Flask</span>
+            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">ReportLab PDF</span>
+            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Audit Engine</span>
           </div>
         </div>
 
-        <a href="http://localhost:3000" id="btn-site" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/25 transition-all">
-          Launch Site Readiness
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        <a href="http://localhost:3000" id="btn-site" target="_blank" class="w-full py-2.5 px-4 rounded-full google-btn-primary text-sm font-medium flex items-center justify-center gap-2 shadow-sm transition-all">
+          <span>Launch Site Readiness</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
         </a>
       </div>
 
       <!-- Card 3: Preventive Maintenance Report -->
-      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative group">
+      <div class="google-card p-6 flex flex-col justify-between relative group">
         <div>
           <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl">
-              🛠️
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#00787c] to-[#00b5b8] p-2 flex items-center justify-center shadow-md shadow-[#00b5b8]/20 text-white">
+              <img src="/static/df_logo_white.png" alt="DF Automation & Robotics" class="w-full h-full object-contain">
             </div>
-            <span id="status-pm" class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
-              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Port 8000
+            <span id="status-pm" class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-[#f1f3f4] dark:bg-[#28292a] text-[#5f6368] dark:text-[#9aa0a6] border border-[#dadce0] dark:border-[#3c4043] transition-all">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#80868b] dark:bg-[#9aa0a6]"></span> Port 8000
             </span>
           </div>
 
-          <h3 class="text-xl font-bold text-white mb-1 group-hover:text-emerald-400 transition-colors">
+          <h3 class="text-lg font-bold text-[#202124] dark:text-[#e8eaed] mb-1 group-hover:text-[#00b5b8] dark:group-hover:text-[#00b5b8] transition-colors">
             Preventive Maintenance Report
           </h3>
-          <p class="text-xs text-emerald-400/90 font-mono mb-3">preventive-maintenance</p>
-          <p class="text-sm text-slate-400 leading-relaxed mb-4">
+          <p class="text-xs text-[#00787c] dark:text-[#00b5b8] font-mono mb-3 bg-[#e6f4ea] dark:bg-[#00787c]/20 px-2.5 py-0.5 rounded-full w-fit font-medium border border-[#ceead6] dark:border-[#00787c]/40">preventive-maintenance</p>
+          <p class="text-sm text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed mb-4">
             Periodic robot health audits, hardware checklist logs, component wear tracking, and AI-assisted maintenance report generator.
           </p>
 
           <div class="flex flex-wrap gap-1.5 mb-6">
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Python Flask</span>
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">ReportLab PDF</span>
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Gemini AI</span>
+            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Python Flask</span>
+            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">ReportLab PDF</span>
+            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Gemini AI</span>
           </div>
         </div>
 
-        <a href="http://localhost:8000" id="btn-pm" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/25 transition-all">
-          Launch PM Report App
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        <a href="http://localhost:8000" id="btn-pm" target="_blank" class="w-full py-2.5 px-4 rounded-full google-btn-primary text-sm font-medium flex items-center justify-center gap-2 shadow-sm transition-all">
+          <span>Launch PM Report App</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
         </a>
       </div>
 
     </div>
-
-    <!-- Quick Architecture Overview Banner -->
-    <div class="mt-12 p-6 rounded-2xl glass border border-slate-800 text-slate-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-      <div>
-        <h4 class="font-bold text-white text-sm flex items-center gap-2">
-          <span>📁</span> Modular Architecture Structure
-        </h4>
-        <p class="text-xs text-slate-400 mt-1">
-          Each application is isolated with its own Git repository, dependencies, and environment files under <code class="bg-slate-900 px-1.5 py-0.5 rounded text-blue-300">DF_application/</code>.
-        </p>
-      </div>
-      <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
-        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">dfchatbot (5000)</span>
-        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">site-readiness (3000)</span>
-        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">preventive-maintenance (8000)</span>
-      </div>
-    </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="relative z-10 glass border-t border-slate-800/80 px-6 py-4 text-center text-xs text-slate-500">
-    <p>DF Application Hub &bull; Autonomous Mobile Robotics Suite &bull; 2026</p>
-  </footer>
-
   <script>
+    const THEME_ICONS = {
+      light: 'light_mode',
+      dark: 'dark_mode',
+      system: 'brightness_auto'
+    };
+
+    const THEME_LABELS = {
+      light: 'Light',
+      dark: 'Dark',
+      system: 'Device'
+    };
+
+    function getSavedTheme() {
+      return localStorage.getItem('df_portal_theme') || 'system';
+    }
+
+    function applyTheme(theme) {
+      const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      const activeIcon = document.getElementById('themeActiveIcon');
+      const activeLabel = document.getElementById('themeActiveLabel');
+      if (activeIcon) activeIcon.textContent = THEME_ICONS[theme] || 'brightness_auto';
+      if (activeLabel) activeLabel.textContent = THEME_LABELS[theme] || 'System';
+
+      ['light', 'dark', 'system'].forEach(t => {
+        const opt = document.getElementById(`opt-${t}`);
+        if (opt) {
+          const check = opt.querySelector('.theme-check');
+          if (check) {
+            if (t === theme) {
+              check.classList.remove('hidden');
+              opt.classList.add('font-semibold', 'bg-[#f1f3f4]', 'dark:bg-[#333537]');
+            } else {
+              check.classList.add('hidden');
+              opt.classList.remove('font-semibold', 'bg-[#f1f3f4]', 'dark:bg-[#333537]');
+            }
+          }
+        }
+      });
+    }
+
+    function setTheme(theme) {
+      localStorage.setItem('df_portal_theme', theme);
+      applyTheme(theme);
+      closeThemeMenu();
+    }
+
+    function toggleThemeMenu(e) {
+      e.stopPropagation();
+      const menu = document.getElementById('themeMenu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    function closeThemeMenu() {
+      const menu = document.getElementById('themeMenu');
+      if (menu) menu.classList.add('hidden');
+    }
+
+    window.addEventListener('click', (e) => {
+      const container = document.getElementById('themeDropdownContainer');
+      if (container && !container.contains(e.target)) {
+        closeThemeMenu();
+      }
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (getSavedTheme() === 'system') {
+        applyTheme('system');
+      }
+    });
+
     function getHost() {
       return window.location.hostname || 'localhost';
     }
@@ -221,38 +391,81 @@
       const ipBadge = document.getElementById('currentIpBadge');
       if (ipBadge) {
         if (host === 'localhost' || host === '127.0.0.1') {
-          ipBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-cyan-400"></span> Local Host`;
+          ipBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#1a73e8] dark:bg-[#8ab4f8]"></span> Local Host`;
+          ipBadge.className = "hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-medium px-3.5 py-1.5 rounded-full bg-[#f1f3f4] dark:bg-[#28292a] border border-[#dadce0] dark:border-[#3c4043] text-[#3c4043] dark:text-[#9aa0a6]";
         } else {
-          ipBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Wi-Fi IP: ${host}`;
+          ipBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#34a853] dark:bg-[#81c995] animate-pulse"></span> Wi-Fi IP: ${host}`;
+          ipBadge.className = "hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-medium px-3.5 py-1.5 rounded-full bg-[#e6f4ea] dark:bg-[#0f291e] border border-[#ceead6] dark:border-[#137333]/50 text-[#137333] dark:text-[#81c995]";
         }
       }
     }
 
     async function checkHealth(url, elementId, portName) {
       const el = document.getElementById(elementId);
+      if (el) {
+        el.className = "inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-[#e8f0fe] dark:bg-[#041e49] text-[#1967d2] dark:text-[#8ab4f8] border border-[#d2e3fc] dark:border-[#1a73e8]/30 transition-all";
+        el.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-[#1a73e8] dark:bg-[#8ab4f8] animate-ping"></span> Checking (${portName})`;
+      }
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 2000);
-        await fetch(url, { mode: 'no-cors', signal: controller.signal });
+        await fetch(`${url}?_t=${Date.now()}`, { mode: 'no-cors', cache: 'no-store', signal: controller.signal });
         clearTimeout(timeoutId);
-        el.className = "inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/60";
-        el.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online (${portName})`;
+        if (el) {
+          el.className = "inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-[#e6f4ea] dark:bg-[#0f291e] text-[#137333] dark:text-[#81c995] border border-[#ceead6] dark:border-[#137333]/30 transition-all";
+          el.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-[#34a853] dark:bg-[#81c995] animate-pulse"></span> Online (${portName})`;
+        }
       } catch (err) {
-        el.className = "inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-amber-950/40 text-amber-400/80 border border-amber-800/40";
-        el.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Standby (${portName})`;
+        if (el) {
+          el.className = "inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-[#fef7e0] dark:bg-[#2d2200] text-[#b06000] dark:text-[#fdd663] border border-[#feefc3] dark:border-[#fbbc04]/30 transition-all";
+          el.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-[#fbbc04] dark:bg-[#fdd663]"></span> Standby (${portName})`;
+        }
       }
     }
 
-    function checkAllHealth() {
-      const host = getHost();
+    let isChecking = false;
+    async function checkAllHealth() {
+      if (isChecking) return;
+      isChecking = true;
+
+      const refreshBtn = document.getElementById('refreshBtn');
+      const refreshIcon = document.getElementById('refreshIcon');
+      const refreshText = document.getElementById('refreshText');
+
+      if (refreshBtn) {
+        refreshBtn.disabled = true;
+        refreshBtn.classList.add('opacity-70');
+      }
+      if (refreshIcon) {
+        refreshIcon.classList.add('animate-spin');
+      }
+      if (refreshText) {
+        refreshText.textContent = 'Refreshing...';
+      }
+
       updateDynamicLinks();
-      checkHealth(`http://${host}:5000`, 'status-rag', ':5000');
-      checkHealth(`http://${host}:3000`, 'status-site', ':3000');
-      checkHealth(`http://${host}:8000`, 'status-pm', ':8000');
+
+      await Promise.allSettled([
+        checkHealth(`http://${getHost()}:5000`, 'status-rag', ':5000'),
+        checkHealth(`http://${getHost()}:3000`, 'status-site', ':3000'),
+        checkHealth(`http://${getHost()}:8000`, 'status-pm', ':8000')
+      ]);
+
+      if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+      if (refreshText) refreshText.textContent = 'Refresh Status';
+      if (refreshBtn) {
+        refreshBtn.disabled = false;
+        refreshBtn.classList.remove('opacity-70');
+      }
+
+      isChecking = false;
     }
 
-    // Auto-check on load
-    window.addEventListener('DOMContentLoaded', checkAllHealth);
+    // Auto-check on load & initialize theme selector
+    window.addEventListener('DOMContentLoaded', () => {
+      applyTheme(getSavedTheme());
+      checkAllHealth();
+    });
   </script>
 </body>
 </html>
