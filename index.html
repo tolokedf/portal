@@ -191,12 +191,45 @@
   </header>
 
   <!-- Main Content -->
-  <main class="relative z-10 max-w-7xl mx-auto px-6 py-10 flex-1 w-full flex flex-col justify-center">
+  <main class="relative z-10 max-w-7xl mx-auto px-6 py-8 flex-1 w-full flex flex-col justify-center">
     <!-- Application Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
       
-      <!-- Card 1: DF RAG Project -->
-      <div class="google-card p-6 flex flex-col justify-between relative group">
+      <!-- Card 1: DF FieldOps (Field Deployment Hub) -->
+      <div class="google-card p-5 sm:p-6 flex flex-col justify-between relative group">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-2xl bg-[#e8f0fe] dark:bg-[#041e49] border border-[#d2e3fc] dark:border-[#1a73e8]/30 text-[#1a73e8] dark:text-[#8ab4f8] flex items-center justify-center shadow-xs">
+              <i class="fa-solid fa-diagram-project text-[22px]"></i>
+            </div>
+            <span id="status-fieldops" class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-[#f1f3f4] dark:bg-[#28292a] text-[#5f6368] dark:text-[#9aa0a6] border border-[#dadce0] dark:border-[#3c4043] transition-all">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#80868b] dark:bg-[#9aa0a6]"></span> Port 4000
+            </span>
+          </div>
+
+          <h3 class="text-base font-bold text-[#202124] dark:text-[#e8eaed] mb-1 group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors">
+            FieldOps (Deployment Hub)
+          </h3>
+          <p class="text-xs text-[#1a73e8] dark:text-[#8ab4f8] font-mono mb-3 bg-[#e8f0fe] dark:bg-[#041e49] px-2.5 py-0.5 rounded-full w-fit font-medium border border-[#d2e3fc] dark:border-[#1a73e8]/30">field-ops</p>
+          <p class="text-xs text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed mb-4">
+            Standardized AMR project management: Portfolio view, Open Action Lists (OAL), field issues, short stop logs, MoM, and Daily Activity Reports (DAR).
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Python Flask</span>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Fleet Portfolio</span>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Ops Standard</span>
+          </div>
+        </div>
+
+        <a href="http://localhost:4000" id="btn-fieldops" target="_blank" class="w-full py-2 px-4 rounded-full google-btn-primary text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all">
+          <span>Launch FieldOps</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        </a>
+      </div>
+
+      <!-- Card 2: DF RAG Project -->
+      <div class="google-card p-5 sm:p-6 flex flex-col justify-between relative group">
         <div>
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 rounded-2xl bg-[#e8f0fe] dark:bg-[#041e49] border border-[#d2e3fc] dark:border-[#1a73e8]/30 text-[#1a73e8] dark:text-[#8ab4f8] flex items-center justify-center shadow-xs">
@@ -207,29 +240,29 @@
             </span>
           </div>
 
-          <h3 class="text-lg font-bold text-[#202124] dark:text-[#e8eaed] mb-1 group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors">
-            AI Chatbot (Multimodal RAG)
+          <h3 class="text-base font-bold text-[#202124] dark:text-[#e8eaed] mb-1 group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors">
+            AI Chatbot (Vision RAG)
           </h3>
           <p class="text-xs text-[#1a73e8] dark:text-[#8ab4f8] font-mono mb-3 bg-[#e8f0fe] dark:bg-[#041e49] px-2.5 py-0.5 rounded-full w-fit font-medium border border-[#d2e3fc] dark:border-[#1a73e8]/30">dfchatbot</p>
-          <p class="text-sm text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed mb-4">
+          <p class="text-xs text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed mb-4">
             Vision-first multimodal retrieval for robotics manuals (NavWiz & DFleet) powered by Gemini Embedding 2, ChromaDB, and Gemini 3.5 Flash.
           </p>
 
           <div class="flex flex-wrap gap-1.5 mb-6">
-            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Python Flask</span>
-            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">ChromaDB</span>
-            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Gemini 3.5</span>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Python Flask</span>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">ChromaDB</span>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Gemini 3.5</span>
           </div>
         </div>
 
-        <a href="http://localhost:5000" id="btn-rag" target="_blank" class="w-full py-2.5 px-4 rounded-full google-btn-primary text-sm font-medium flex items-center justify-center gap-2 shadow-sm transition-all">
+        <a href="http://localhost:5000" id="btn-rag" target="_blank" class="w-full py-2 px-4 rounded-full google-btn-primary text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all">
           <span>Launch Chatbot</span>
-          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
         </a>
       </div>
 
-      <!-- Card 2: Site Readiness -->
-      <div class="google-card p-6 flex flex-col justify-between relative group">
+      <!-- Card 3: Site Readiness -->
+      <div class="google-card p-5 sm:p-6 flex flex-col justify-between relative group">
         <div>
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 rounded-2xl bg-[#e0f2fe] dark:bg-[#082f49] border border-[#bae6fd] dark:border-[#0284c7]/30 text-[#0284c7] dark:text-[#38bdf8] flex items-center justify-center shadow-xs">
@@ -240,29 +273,29 @@
             </span>
           </div>
 
-          <h3 class="text-lg font-bold text-[#202124] dark:text-[#e8eaed] mb-1 group-hover:text-[#0284c7] dark:group-hover:text-[#38bdf8] transition-colors">
+          <h3 class="text-base font-bold text-[#202124] dark:text-[#e8eaed] mb-1 group-hover:text-[#0284c7] dark:group-hover:text-[#38bdf8] transition-colors">
             Site Readiness App
           </h3>
           <p class="text-xs text-[#0284c7] dark:text-[#38bdf8] font-mono mb-3 bg-[#e0f2fe] dark:bg-[#082f49] px-2.5 py-0.5 rounded-full w-fit font-medium border border-[#bae6fd] dark:border-[#0284c7]/30">site-readiness</p>
-          <p class="text-sm text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed mb-4">
+          <p class="text-xs text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed mb-4">
             Interactive deployment readiness evaluation, sensor snapshots, action items tracking, and professional PDF verification reporting.
           </p>
 
           <div class="flex flex-wrap gap-1.5 mb-6">
-            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Python Flask</span>
-            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">ReportLab PDF</span>
-            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Audit Engine</span>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Python Flask</span>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">ReportLab PDF</span>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Audit Engine</span>
           </div>
         </div>
 
-        <a href="http://localhost:3000" id="btn-site" target="_blank" class="w-full py-2.5 px-4 rounded-full google-btn-primary text-sm font-medium flex items-center justify-center gap-2 shadow-sm transition-all">
+        <a href="http://localhost:3000" id="btn-site" target="_blank" class="w-full py-2 px-4 rounded-full google-btn-primary text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all">
           <span>Launch Site Readiness</span>
-          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
         </a>
       </div>
 
-      <!-- Card 3: Preventive Maintenance Report -->
-      <div class="google-card p-6 flex flex-col justify-between relative group">
+      <!-- Card 4: Preventive Maintenance Report -->
+      <div class="google-card p-5 sm:p-6 flex flex-col justify-between relative group">
         <div>
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#00787c] to-[#00b5b8] p-2 flex items-center justify-center shadow-md shadow-[#00b5b8]/20 text-white">
@@ -273,24 +306,24 @@
             </span>
           </div>
 
-          <h3 class="text-lg font-bold text-[#202124] dark:text-[#e8eaed] mb-1 group-hover:text-[#00b5b8] dark:group-hover:text-[#00b5b8] transition-colors">
-            Preventive Maintenance Report
+          <h3 class="text-base font-bold text-[#202124] dark:text-[#e8eaed] mb-1 group-hover:text-[#00b5b8] dark:group-hover:text-[#00b5b8] transition-colors">
+            Preventive Maintenance
           </h3>
           <p class="text-xs text-[#00787c] dark:text-[#00b5b8] font-mono mb-3 bg-[#e6f4ea] dark:bg-[#00787c]/20 px-2.5 py-0.5 rounded-full w-fit font-medium border border-[#ceead6] dark:border-[#00787c]/40">preventive-maintenance</p>
-          <p class="text-sm text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed mb-4">
+          <p class="text-xs text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed mb-4">
             Periodic robot health audits, hardware checklist logs, component wear tracking, and AI-assisted maintenance report generator.
           </p>
 
           <div class="flex flex-wrap gap-1.5 mb-6">
-            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Python Flask</span>
-            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">ReportLab PDF</span>
-            <span class="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Gemini AI</span>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Python Flask</span>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">ReportLab PDF</span>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded-lg bg-[#f1f3f4] dark:bg-[#2d2f31] text-[#3c4043] dark:text-[#e8eaed] border border-[#e8eaed] dark:border-[#3c4043]">Gemini AI</span>
           </div>
         </div>
 
-        <a href="http://localhost:8000" id="btn-pm" target="_blank" class="w-full py-2.5 px-4 rounded-full google-btn-primary text-sm font-medium flex items-center justify-center gap-2 shadow-sm transition-all">
-          <span>Launch PM Report App</span>
-          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+        <a href="http://localhost:8000" id="btn-pm" target="_blank" class="w-full py-2 px-4 rounded-full google-btn-primary text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all">
+          <span>Launch PM App</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
         </a>
       </div>
 
@@ -380,10 +413,12 @@
 
     function updateDynamicLinks() {
       const host = getHost();
+      const fieldopsBtn = document.getElementById('btn-fieldops');
       const ragBtn = document.getElementById('btn-rag');
       const siteBtn = document.getElementById('btn-site');
       const pmBtn = document.getElementById('btn-pm');
 
+      if (fieldopsBtn) fieldopsBtn.href = `http://${host}:4000`;
       if (ragBtn) ragBtn.href = `http://${host}:5000`;
       if (siteBtn) siteBtn.href = `http://${host}:3000`;
       if (pmBtn) pmBtn.href = `http://${host}:8000`;
@@ -446,6 +481,7 @@
       updateDynamicLinks();
 
       await Promise.allSettled([
+        checkHealth(`http://${getHost()}:4000`, 'status-fieldops', ':4000'),
         checkHealth(`http://${getHost()}:5000`, 'status-rag', ':5000'),
         checkHealth(`http://${getHost()}:3000`, 'status-site', ':3000'),
         checkHealth(`http://${getHost()}:8000`, 'status-pm', ':8000')
