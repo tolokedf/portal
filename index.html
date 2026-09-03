@@ -54,6 +54,9 @@
       </div>
       
       <div class="flex items-center gap-3">
+        <span id="currentIpBadge" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-medium px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-cyan-400">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Network Active
+        </span>
         <button onclick="checkAllHealth()" class="text-xs flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors border border-slate-700">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
           Refresh Status
@@ -91,7 +94,7 @@
           <h3 class="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">
             AI Chatbot (Multimodal RAG)
           </h3>
-          <p class="text-xs text-blue-400/90 font-mono mb-3">df_rag_project</p>
+          <p class="text-xs text-blue-400/90 font-mono mb-3">dfchatbot</p>
           <p class="text-sm text-slate-400 leading-relaxed mb-4">
             Vision-first multimodal retrieval for robotics manuals (NavWiz & DFleet) powered by Gemini Embedding 2, ChromaDB, and Gemini 3.5 Flash.
           </p>
@@ -103,7 +106,7 @@
           </div>
         </div>
 
-        <a href="http://localhost:5000" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25 transition-all">
+        <a href="http://localhost:5000" id="btn-rag" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25 transition-all">
           Launch Chatbot
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
         </a>
@@ -130,13 +133,13 @@
           </p>
 
           <div class="flex flex-wrap gap-1.5 mb-6">
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">React 19 / Vite</span>
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Express TS</span>
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">jsPDF</span>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Python Flask</span>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">ReportLab PDF</span>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Audit Engine</span>
           </div>
         </div>
 
-        <a href="http://localhost:3000" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/25 transition-all">
+        <a href="http://localhost:3000" id="btn-site" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/25 transition-all">
           Launch Site Readiness
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
         </a>
@@ -163,13 +166,13 @@
           </p>
 
           <div class="flex flex-wrap gap-1.5 mb-6">
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">FastAPI / Flask</span>
-            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Report Engine</span>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Python Flask</span>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">ReportLab PDF</span>
             <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Gemini AI</span>
           </div>
         </div>
 
-        <a href="http://localhost:8000" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/25 transition-all">
+        <a href="http://localhost:8000" id="btn-pm" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/25 transition-all">
           Launch PM Report App
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
         </a>
@@ -188,7 +191,7 @@
         </p>
       </div>
       <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
-        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">df_rag_project (5000)</span>
+        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">dfchatbot (5000)</span>
         <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">site-readiness (3000)</span>
         <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">preventive-maintenance (8000)</span>
       </div>
@@ -201,6 +204,30 @@
   </footer>
 
   <script>
+    function getHost() {
+      return window.location.hostname || 'localhost';
+    }
+
+    function updateDynamicLinks() {
+      const host = getHost();
+      const ragBtn = document.getElementById('btn-rag');
+      const siteBtn = document.getElementById('btn-site');
+      const pmBtn = document.getElementById('btn-pm');
+
+      if (ragBtn) ragBtn.href = `http://${host}:5000`;
+      if (siteBtn) siteBtn.href = `http://${host}:3000`;
+      if (pmBtn) pmBtn.href = `http://${host}:8000`;
+
+      const ipBadge = document.getElementById('currentIpBadge');
+      if (ipBadge) {
+        if (host === 'localhost' || host === '127.0.0.1') {
+          ipBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-cyan-400"></span> Local Host`;
+        } else {
+          ipBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Wi-Fi IP: ${host}`;
+        }
+      }
+    }
+
     async function checkHealth(url, elementId, portName) {
       const el = document.getElementById(elementId);
       try {
@@ -217,9 +244,11 @@
     }
 
     function checkAllHealth() {
-      checkHealth('http://localhost:5000', 'status-rag', ':5000');
-      checkHealth('http://localhost:3000', 'status-site', ':3000');
-      checkHealth('http://localhost:8000', 'status-pm', ':8000');
+      const host = getHost();
+      updateDynamicLinks();
+      checkHealth(`http://${host}:5000`, 'status-rag', ':5000');
+      checkHealth(`http://${host}:3000`, 'status-site', ':3000');
+      checkHealth(`http://${host}:8000`, 'status-pm', ':8000');
     }
 
     // Auto-check on load

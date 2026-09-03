@@ -14,12 +14,26 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=DIRECTORY, **kwargs)
 
+def get_local_ip():
+    import socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(('8.8.8.8', 80))
+        ip = s.getsockname()[0]
+    except Exception:
+        ip = '127.0.0.1'
+    finally:
+        s.close()
+    return ip
+
 if __name__ == "__main__":
+    local_ip = get_local_ip()
     with socketserver.TCPServer(("", PORT), Handler) as httpd:
-        print("=" * 60)
+        print("=" * 65)
         print("🚀 DF Application Portal is running!")
-        print(f"📍 Central Dashboard: http://localhost:{PORT}")
-        print("=" * 60)
+        print(f"📍 Local Access:   http://localhost:{PORT}")
+        print(f"🌐 Wi-Fi / LAN:    http://{local_ip}:{PORT}")
+        print("=" * 65)
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
