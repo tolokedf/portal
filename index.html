@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DF Application Suite - Central Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .glass {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5), 0 0 25px -5px rgba(59, 130, 246, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+  
+  <!-- Background Glows -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 -right-40 w-96 h-96 bg-cyan-600/15 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-indigo-600/15 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="relative z-10 glass border-b border-slate-800/80 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20 font-extrabold text-lg text-white">
+          DF
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+            DF Application Suite
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Portal Hub</span>
+          </h1>
+          <p class="text-xs text-slate-400">Modular Multi-App Unified Gateway</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-3">
+        <button onclick="checkAllHealth()" class="text-xs flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors border border-slate-700">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          Refresh Status
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="relative z-10 max-w-7xl mx-auto px-6 py-12 flex-1 w-full">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
+        Dedicated Enterprise Robotics Apps
+      </h2>
+      <p class="text-sm text-slate-400">
+        Launch dedicated micro-applications independently, run local diagnostics, and manage deployment workflows.
+      </p>
+    </div>
+
+    <!-- Application Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Card 1: DF RAG Project -->
+      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative group">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-2xl">
+              💬
+            </div>
+            <span id="status-rag" class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Port 5000
+            </span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">
+            AI Chatbot (Multimodal RAG)
+          </h3>
+          <p class="text-xs text-blue-400/90 font-mono mb-3">df_rag_project</p>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">
+            Vision-first multimodal retrieval for robotics manuals (NavWiz & DFleet) powered by Gemini Embedding 2, ChromaDB, and Gemini 3.5 Flash.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Python Flask</span>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">ChromaDB</span>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Gemini 3.5</span>
+          </div>
+        </div>
+
+        <a href="http://localhost:5000" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25 transition-all">
+          Launch Chatbot
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+
+      <!-- Card 2: Site Readiness -->
+      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative group">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl">
+              📋
+            </div>
+            <span id="status-site" class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Port 3000
+            </span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors">
+            Site Readiness App
+          </h3>
+          <p class="text-xs text-cyan-400/90 font-mono mb-3">site-readiness</p>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">
+            Interactive deployment readiness evaluation, sensor snapshots, action items tracking, and professional PDF verification reporting.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">React 19 / Vite</span>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Express TS</span>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">jsPDF</span>
+          </div>
+        </div>
+
+        <a href="http://localhost:3000" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/25 transition-all">
+          Launch Site Readiness
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+
+      <!-- Card 3: Preventive Maintenance Report -->
+      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative group">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl">
+              🛠️
+            </div>
+            <span id="status-pm" class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Port 8000
+            </span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white mb-1 group-hover:text-emerald-400 transition-colors">
+            Preventive Maintenance Report
+          </h3>
+          <p class="text-xs text-emerald-400/90 font-mono mb-3">preventive-maintenance</p>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">
+            Periodic robot health audits, hardware checklist logs, component wear tracking, and AI-assisted maintenance report generator.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">FastAPI / Flask</span>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Report Engine</span>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">Gemini AI</span>
+          </div>
+        </div>
+
+        <a href="http://localhost:8000" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/25 transition-all">
+          Launch PM Report App
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Quick Architecture Overview Banner -->
+    <div class="mt-12 p-6 rounded-2xl glass border border-slate-800 text-slate-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div>
+        <h4 class="font-bold text-white text-sm flex items-center gap-2">
+          <span>📁</span> Modular Architecture Structure
+        </h4>
+        <p class="text-xs text-slate-400 mt-1">
+          Each application is isolated with its own Git repository, dependencies, and environment files under <code class="bg-slate-900 px-1.5 py-0.5 rounded text-blue-300">DF_application/</code>.
+        </p>
+      </div>
+      <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">df_rag_project (5000)</span>
+        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">site-readiness (3000)</span>
+        <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">preventive-maintenance (8000)</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-10 glass border-t border-slate-800/80 px-6 py-4 text-center text-xs text-slate-500">
+    <p>DF Application Hub &bull; Autonomous Mobile Robotics Suite &bull; 2026</p>
+  </footer>
+
+  <script>
+    async function checkHealth(url, elementId, portName) {
+      const el = document.getElementById(elementId);
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
+        await fetch(url, { mode: 'no-cors', signal: controller.signal });
+        clearTimeout(timeoutId);
+        el.className = "inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/60";
+        el.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online (${portName})`;
+      } catch (err) {
+        el.className = "inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-amber-950/40 text-amber-400/80 border border-amber-800/40";
+        el.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Standby (${portName})`;
+      }
+    }
+
+    function checkAllHealth() {
+      checkHealth('http://localhost:5000', 'status-rag', ':5000');
+      checkHealth('http://localhost:3000', 'status-site', ':3000');
+      checkHealth('http://localhost:8000', 'status-pm', ':8000');
+    }
+
+    // Auto-check on load
+    window.addEventListener('DOMContentLoaded', checkAllHealth);
+  </script>
+</body>
+</html>
